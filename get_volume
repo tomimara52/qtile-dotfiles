@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+
+import subprocess
+
+command_vol = "amixer -D pulse get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1"
+
+vol = int(subprocess.run(command_vol,
+                         shell=True,
+                         capture_output=True,
+                         text=True
+                         ).stdout)
+
+command_state = "amixer -D pulse get Master | grep '%' | head -n 1 | cut -d '[' -f 3 | cut -d ']' -f 1"
+
+state = subprocess.run(command_state,
+                       shell=True,
+                       capture_output=True,
+                       text=True
+                       ).stdout
+
+icon = ""
+
+if state.strip() == "off":
+    icon = ""
+elif vol <= 25:
+    icon = ""
+elif vol <= 50:
+    icon = ""
+elif vol <= 75:
+    icon = ""
+else:
+    icon = ""
+
+print(icon, end='')

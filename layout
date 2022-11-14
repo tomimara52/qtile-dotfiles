@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+
+import subprocess
+
+layout = subprocess.run('xkblayout-state print "%e"',
+                        text=True,
+                        capture_output=True,
+                        shell=True
+                        ).stdout
+
+if layout == "dvp":
+    print("dvp", end="")
+elif layout == "dvorak":
+    print("dv", end="")
+elif layout == "es":
+    print("es", end="")
